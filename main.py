@@ -63,6 +63,9 @@ def main():
 
     time.sleep(5)
 
+    # Captcha hecho
+
+    # Boton de enviar visitas
     send_views_button = driver.find_element(By.XPATH, "/html/body/div[6]/div/div[2]/div/div/div[5]/div/button")
     send_views_button.click() 
 
@@ -70,18 +73,33 @@ def main():
 
     time.sleep(5)
 
-    enter_video_url_field = driver.find_element(By.XPATH, "/html/body/div[10]/div/form/div/input")
-    enter_video_url_field.send_keys("https://vm.tiktok.com/ZGJVdcb4e/")
-    enter_video_url_field.submit()  # Ingresa la URL del video  
+    # Ingresa la URL del video
+    print("URL del video: ")
+    vid_url = input()
 
-    print("Se ha ingresado la URL del video")
+    # Ingresa numero de visitas
+    print("Número de visitas: ")
+    num_views = int(input())
+    print("Se tardara aproximadamente " + str(int(num_views) / 1000 * 3) + " minutos en completar el proceso")
 
-    time.sleep(2)
+    # Bucle iterativo para enviar las visitas
+    while num_views > 0: 
+        enter_video_url_field = driver.find_element(By.XPATH, "/html/body/div[10]/div/form/div/input")
+        enter_video_url_field.send_keys(vid_url)
+        enter_video_url_field.submit()  # Ingresa la URL del video  
 
-    sending_views_button = driver.find_element(By.XPATH, "/html/body/div[10]/div/div/div[1]/div/form/button")
-    sending_views_button.click()  # Envía las vistas
+        print("Se ha ingresado la URL del video")
 
-    print("Se ha pulsado el botón de enviar vistas")
+        time.sleep(2)
+
+        sending_views_button = driver.find_element(By.XPATH, "/html/body/div[10]/div/div/div[1]/div/form/button")
+        sending_views_button.click()  # Envía las vistas
+
+        print("Se ha pulsado el botón de enviar vistas")
+
+        print("ESPERANDO, quedan " + str(num_views - 1000) + " visitas")
+        time.sleep(180)        
+        num_views -= 1000
 
     
 
